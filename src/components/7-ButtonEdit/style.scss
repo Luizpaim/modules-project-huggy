@@ -1,0 +1,17 @@
+.btnEdit {
+  background-color: var(--white);
+
+  transition: opacity 0.5s ease;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+  }
+}
+.cursor {
+  cursor: not-allowed;
+}
+.iconBtn {
+  margin-right: 12.7px;
+}

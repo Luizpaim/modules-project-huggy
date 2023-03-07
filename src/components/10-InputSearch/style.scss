@@ -1,0 +1,22 @@
+.inputSearch {
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid var(--mine-shaft30);
+  border-top: 1px solid var(--mine-shaft30);
+  background-color: var(--mine-shaft10);
+  width: 100%;
+}
+.spanInputSearch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px 9px 12px;
+  gap: 4px;
+  border: 1px solid var(--mine-shaft30);
+  background-color: var(--mine-shaft10);
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  gap: 10px;
+}

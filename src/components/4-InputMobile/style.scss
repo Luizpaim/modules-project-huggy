@@ -1,0 +1,41 @@
+.inputPhone {
+  border: 1px solid var(--mine-shaft30);
+  background-color: var(--mine-shaft10);
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  padding: 9px 12px 9px 12px;
+  gap: 10px;
+}
+.spanInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+}
+.labelInput {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: var(--mine-shaft);
+}
+.spanMessage {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--alizarin-crimson);
+  display: none;
+}
+.invalid {
+  border: 1px solid var(--alizarin-crimson);
+}
+.invalidMessage {
+  display: inline-block;
+}
+.notObligatory {
+  border: 1px solid var(--mine-shaft30) !important;
+}

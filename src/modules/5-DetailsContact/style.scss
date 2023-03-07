@@ -1,0 +1,125 @@
+.dialogDetails::backdrop {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.dialogDetails {
+  width: 610px;
+  height: 312px;
+  border-radius: 12px;
+  border: 1px solid var(--mine-shaft30);
+  box-shadow: rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  overflow: hidden;
+}
+.titleDialogDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 16px;
+  width: 610px;
+  height: 76px;
+  height: 75px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.btnActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 148px;
+  height: 36px;
+}
+.title {
+  width: 350px;
+  margin-right: 16px;
+}
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  width: 44px;
+  height: 36px;
+  background-color: var(--white);
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 24px;
+  width: 610px;
+  height: 234px;
+  border-top: 1px solid var(--mine-shaft30);
+}
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+
+  width: 562px;
+  height: 18px;
+}
+.labelTitle {
+  width: 90px;
+  height: 16px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  letter-spacing: 0.4px;
+  color: var(--mine-shaft100);
+  margin-right: 16px;
+}
+.labelText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+  width: 456px;
+  height: 18px;
+  color: var(--text-color);
+}
+@media screen and (max-width: 480px) {
+  .dialogDetails {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin: 0;
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--mine-shaft30);
+      border-radius: 0 0 500px 500px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: var(--whiter);
+    }
+  }
+}

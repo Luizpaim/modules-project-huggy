@@ -1,0 +1,22 @@
+.btnSecodary {
+  padding: 9px 12px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 1.25px;
+  gap: 8px;
+  border-radius: 8px;
+  background-color: var(--white);
+  color: var(--mine-shaft40);
+  transition: opacity 0.5s ease;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+  }
+}
+.cursor {
+  cursor: not-allowed;
+}
