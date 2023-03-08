@@ -1,6 +1,6 @@
 {
   "name": "contacts-modules-huggy",
-  "version": "0.0.2",
+  "version": "0.0.10",
   "private": false,
   "scripts": {
     "dev": "vite",
