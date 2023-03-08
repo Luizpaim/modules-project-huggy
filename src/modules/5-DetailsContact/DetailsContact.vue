@@ -2,7 +2,7 @@
   <dialog id="detailsContact" class="dialogDetails">
     <LoadingHuggy :active="active" :loadingTable="true" />
     <header class="titleDialogDetails">
-      <div class="avatar">avatar</div>
+      <div class="avatar"><Avatar :src="this.contactDetails.photo" :name="this.contactDetails.name" /></div>
       <div class="title">
         <h2>{{ this.contactDetails.name }}</h2>
       </div>

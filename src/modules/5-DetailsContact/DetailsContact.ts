@@ -10,6 +10,7 @@ import EditContact from '../../modules/3-EditContact/EditContact.vue'
 import DeleteContact from '../../modules/4-DeleteContact/DeleteContact.vue'
 import ButtonEdit from '../../components/7-ButtonEdit/ButtonEdit.vue'
 import LoadingHuggy from '../../components/10-Loading/LoadingHuggy.vue'
+import Avatar from '../../components/11-Avatar/AvatarUser.vue'
 
 import './style.scss'
 import type { IContact } from './services/Contacts'
@@ -45,13 +46,12 @@ export default defineComponent({
     EditContact,
     DeleteContact,
     ButtonEdit,
-    LoadingHuggy
+    LoadingHuggy,
+    Avatar
   },
   watch: {
     async id() {
-      this.active = true
       await this.getContact()
-      this.active = false
     }
   },
 
@@ -73,6 +73,7 @@ export default defineComponent({
 
     async getContact() {
       if (this.id) {
+        this.active = true
         await stores
           .dispatch('ActionGetByIdContact', {
             id: Number(this.id),
@@ -81,9 +82,11 @@ export default defineComponent({
           .then(async () => {
             if (stores.state.contact) {
               this.contactDetails = stores.state.contact
+              this.active = false
             }
           })
           .catch((error) => {
+            this.active = false
             this.showMessage('danger', error.response.data.reason)
           })
       }
