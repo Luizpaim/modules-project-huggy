@@ -1,5 +1,6 @@
 <template>
   <dialog id="newContact" class="dialog">
+    <LoadingHuggy :active="active" :loadingTable="true" />
     <header class="titleDialog">
       <h2>Adicionar novo contato</h2>
     </header>

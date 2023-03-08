@@ -1,5 +1,6 @@
 <template>
   <dialog id="detailsContact" class="dialogDetails">
+    <LoadingHuggy :active="active" :loadingTable="true" />
     <header class="titleDialogDetails">
       <div class="avatar">avatar</div>
       <div class="title">

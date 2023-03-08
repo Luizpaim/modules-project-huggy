@@ -9,6 +9,7 @@ import InputPhone from '../../components/3-InputPhone/InputPhone.vue'
 import InputMobile from '../../components/4-InputMobile/InputMobile.vue'
 import ButtonSecodary from '../../components/5-ButtonSecodary/ButtonSecodary.vue'
 import Alert from '../../components/6-Alert/Alert.vue'
+import LoadingHuggy from '../../components/10-Loading/LoadingHuggy.vue'
 
 import './style.scss'
 
@@ -36,7 +37,8 @@ export default defineComponent({
         mobile: '',
         phone: '',
         state: ''
-      } as IContact
+      } as IContact,
+      active: false
     }
   },
 
@@ -46,7 +48,8 @@ export default defineComponent({
     InputPhone,
     InputMobile,
     ButtonSecodary,
-    Alert
+    Alert,
+    LoadingHuggy
   },
 
   computed: {
@@ -62,7 +65,9 @@ export default defineComponent({
 
   watch: {
     async id() {
+      this.active = true
       await this.getContact()
+      this.active = false
     }
   },
   emits: ['editContact'],
@@ -93,30 +98,47 @@ export default defineComponent({
     },
 
     closeModal() {
+      if (stores.state.contact) {
+        this.payload.name = stores.state.contact.name
+        this.payload.email = stores.state.contact.email
+        this.payload.address = stores.state.contact.address
+        this.payload.district = stores.state.contact.district
+        this.payload.mobile = stores.state.contact.mobile
+        this.payload.phone = stores.state.contact.phone
+        this.payload.state = stores.state.contact.state
+      }
       const modal = document.getElementById('editContact') as HTMLDialogElement
       modal.close()
     },
 
-    saveContact() {
+    async saveContact() {
+      this.active = true
       const phone = this.payload.phone.replace(/\D/g, '')
       const mobile = this.payload.mobile.replace(/\D/g, '')
 
       this.payload.phone = phone
       this.payload.mobile = mobile
 
-      stores
+      await stores
         .dispatch('ActionPutContact', {
           payload: this.payload,
           id: Number(this.id),
           token: this.token
         })
         .then(async () => {
+          this.active = false
           this.showMessage('success', 'Contato salvo com sucesso!')
-          await this.delay(1000)
-          this.$emit('editContact')
-          this.closeModal()
+            .then(() => {
+              this.active = true
+              this.$emit('editContact')
+            })
+            .finally(() => {
+              this.closeModal()
+              this.active = false
+            })
         })
         .catch((error) => {
+          this.active = false
           this.showMessage('danger', error.response.data.reason)
         })
     },

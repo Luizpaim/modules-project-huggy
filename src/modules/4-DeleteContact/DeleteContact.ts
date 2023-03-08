@@ -57,10 +57,12 @@ export default defineComponent({
           })
           .then(() => {
             this.contactDelete = stores.state.contact
-            this.showModal()
           })
           .catch((error) => {
             this.showMessage('danger', error.response.data.reason)
+          })
+          .finally(() => {
+            this.showModal()
           })
       }
     },
@@ -72,14 +74,17 @@ export default defineComponent({
         })
         .then(async () => {
           this.showMessage('success', 'Contato excluido com sucesso!')
-          this.$emit('deleteContact')
-          await this.delay(1000)
-          this.closeModal()
+            .then(() => {
+              this.$emit('deleteContact')
+            })
+            .finally(() => {
+              this.closeModal()
+            })
         })
         .catch(async (error) => {
-          this.showMessage('danger', error.response.data.reason)
-          await this.delay(1000)
-          this.closeModal()
+          this.showMessage('danger', error.response.data.reason).finally(() => {
+            this.closeModal()
+          })
         })
     },
 

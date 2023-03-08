@@ -1,0 +1,23 @@
+.progress {
+  height: 100%;
+  width: 100%;
+  background-color: var(--white);
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress img {
+  width: 100px;
+}
+.size {
+  width: 100px;
+  height: 100px;
+}
+.table {
+  background: rgba(255, 255, 255, 0.5) !important;
+}

@@ -9,6 +9,7 @@ import ButtonTertiary from '../../components/9-ButtonTertiary/ButtonTertiary.vue
 import EditContact from '../../modules/3-EditContact/EditContact.vue'
 import DeleteContact from '../../modules/4-DeleteContact/DeleteContact.vue'
 import ButtonEdit from '../../components/7-ButtonEdit/ButtonEdit.vue'
+import LoadingHuggy from '../../components/10-Loading/LoadingHuggy.vue'
 
 import './style.scss'
 import type { IContact } from './services/Contacts'
@@ -31,7 +32,8 @@ export default defineComponent({
       },
       delay: (ms: number) => new Promise((res) => setTimeout(res, ms)),
       contactDetails: {} as IContact | null,
-      idContact: ''
+      idContact: '',
+      active: false
     }
   },
 
@@ -42,11 +44,14 @@ export default defineComponent({
     ButtonTertiary,
     EditContact,
     DeleteContact,
-    ButtonEdit
+    ButtonEdit,
+    LoadingHuggy
   },
   watch: {
     async id() {
+      this.active = true
       await this.getContact()
+      this.active = false
     }
   },
 
@@ -60,9 +65,10 @@ export default defineComponent({
     },
     async closeModal() {
       this.$emit('detailsContact')
-      await this.delay(1000)
-      const modal = document.getElementById('detailsContact') as HTMLDialogElement
-      modal.close()
+      await this.getContact().finally(() => {
+        const modal = document.getElementById('detailsContact') as HTMLDialogElement
+        modal.close()
+      })
     },
 
     async getContact() {

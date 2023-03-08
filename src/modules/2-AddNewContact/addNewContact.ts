@@ -8,6 +8,7 @@ import InputText from '../../components/2-InputText/InputText.vue'
 import InputPhone from '../../components/3-InputPhone/InputPhone.vue'
 import InputMobile from '../../components/4-InputMobile/InputMobile.vue'
 import ButtonSecodary from '../../components/5-ButtonSecodary/ButtonSecodary.vue'
+import LoadingHuggy from '../../components/10-Loading/LoadingHuggy.vue'
 import Alert from '../../components/6-Alert/Alert.vue'
 
 import iconPlus from '../../assets/image/iconPlus.png'
@@ -39,7 +40,8 @@ export default defineComponent({
         mobile: '',
         phone: '',
         state: ''
-      } as IContact
+      } as IContact,
+      active: false
     }
   },
 
@@ -49,7 +51,8 @@ export default defineComponent({
     InputPhone,
     InputMobile,
     ButtonSecodary,
-    Alert
+    Alert,
+    LoadingHuggy
   },
 
   computed: {
@@ -82,6 +85,7 @@ export default defineComponent({
     },
 
     saveContact() {
+      this.active = true
       const phone = this.payload.phone.replace(/\D/g, '')
       const mobile = this.payload.mobile.replace(/\D/g, '')
 
@@ -94,12 +98,18 @@ export default defineComponent({
           token: this.token
         })
         .then(async () => {
+          this.active = false
           this.showMessage('success', 'Contato salvo com sucesso!')
-          this.$emit('addNewContact')
-          await this.delay(1000)
-          this.closeModal()
+            .then(() => {
+              this.$emit('addNewContact')
+            })
+            .finally(() => {
+              this.active = false
+              this.closeModal()
+            })
         })
         .catch((error) => {
+          this.active = false
           this.showMessage('danger', error.response.data.reason)
         })
     },
