@@ -26,7 +26,7 @@ export default defineComponent({
         type: '',
         visible: false
       },
-      contactDelete: {} as IContact | null,
+      contactDelete: {} as IContact,
       delay: (ms: number) => new Promise((res) => setTimeout(res, ms))
     }
   },
@@ -37,13 +37,14 @@ export default defineComponent({
     ButtonDelete,
     ButtonTertiary
   },
+  watch: {
+    async id() {
+      await this.getContact()
+    }
+  },
+
   emits: ['deleteContact'],
   methods: {
-    showModal() {
-      const modal = document.getElementById('deleteContact') as HTMLDialogElement
-      modal.showModal()
-    },
-
     closeModal() {
       const modal = document.getElementById('deleteContact') as HTMLDialogElement
       modal.close()
@@ -56,13 +57,10 @@ export default defineComponent({
             token: this.token
           })
           .then(() => {
-            this.contactDelete = stores.state.contact
+            if (stores.state.contact) this.contactDelete = stores.state.contact
           })
           .catch((error) => {
             this.showMessage('danger', error.response.data.reason)
-          })
-          .finally(() => {
-            this.showModal()
           })
       }
     },

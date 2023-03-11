@@ -15,6 +15,5 @@
       </div>
     </footer>
   </dialog>
-  <ButtonDelete :onClick="getContact" />
 </template>
 <script src="./DeleteContact.ts"></script>

@@ -32,8 +32,9 @@ export default defineComponent({
         visible: false
       },
       delay: (ms: number) => new Promise((res) => setTimeout(res, ms)),
-      contactDetails: {} as IContact | null,
+      contactDetails: {} as IContact,
       idContact: '',
+      idDeleteContact: '',
       active: false
     }
   },
@@ -63,9 +64,14 @@ export default defineComponent({
       const modal = document.getElementById('editContact') as HTMLDialogElement
       modal.showModal()
     },
+    openDeleteDialog() {
+      this.idDeleteContact = this.contactDetails.id
+      const modal = document.getElementById('deleteContact') as HTMLDialogElement
+      modal.showModal()
+    },
     async closeModal() {
       this.$emit('detailsContact')
-      await this.getContact().finally(() => {
+      this.getContact().then(() => {
         const modal = document.getElementById('detailsContact') as HTMLDialogElement
         modal.close()
       })
@@ -88,6 +94,8 @@ export default defineComponent({
           .catch((error) => {
             this.active = false
             this.showMessage('danger', error.response.data.reason)
+            const modal = document.getElementById('detailsContact') as HTMLDialogElement
+            modal.close()
           })
       }
     },

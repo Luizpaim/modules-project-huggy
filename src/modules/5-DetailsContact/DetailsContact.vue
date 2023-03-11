@@ -13,7 +13,8 @@
         </div>
 
         <div class="button">
-          <DeleteContact :id="this.id" :token="this.token" @deleteContact="closeModal()" />
+          <ButtonDelete :onClick="openDeleteDialog" />
+          <DeleteContact :id="this.idDeleteContact" :token="this.token" @deleteContact="closeModal()" />
         </div>
         <div class="button">
           <button class="button" :onClick="closeModal">

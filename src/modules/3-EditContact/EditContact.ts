@@ -38,7 +38,8 @@ export default defineComponent({
         phone: '',
         state: ''
       } as IContact,
-      active: false
+      active: false,
+      activeButton: true
     }
   },
 
@@ -58,7 +59,8 @@ export default defineComponent({
         String(this.payload.name).trim() === '' ||
         String(this.payload.email).trim() === '' ||
         String(this.payload.phone).trim() === '' ||
-        String(this.payload.mobile).trim() === ''
+        String(this.payload.mobile).trim() === '' ||
+        this.activeButton === false
       )
     }
   },
@@ -113,6 +115,7 @@ export default defineComponent({
 
     async saveContact() {
       this.active = true
+      this.activeButton = false
       const phone = this.payload.phone.replace(/\D/g, '')
       const mobile = this.payload.mobile.replace(/\D/g, '')
 
@@ -135,10 +138,12 @@ export default defineComponent({
             .finally(() => {
               this.closeModal()
               this.active = false
+              this.activeButton = true
             })
         })
         .catch((error) => {
           this.active = false
+          this.activeButton = true
           this.showMessage('danger', error.response.data.reason)
         })
     },
